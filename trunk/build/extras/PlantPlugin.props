@@ -1,0 +1,28 @@
+plugin.plantplugin.PlantPlugin.activate=defer
+plugin.plantplugin.PlantPlugin.author=troy
+plugin.plantplugin.PlantPlugin.description=Jedit Plantuml Plugin
+plugin.plantplugin.PlantPlugin.docs=docs/PlantPlugin.html
+plugin.plantplugin.PlantPlugin.longdescription=description.html
+plugin.plantplugin.PlantPlugin.name=PlantPlugin
+plugin.plantplugin.PlantPlugin.usePluginHome=true
+
+plugin.plantplugin.PlantPlugin.version=0.1
+
+plugin.plantplugin.PlantPlugin.depend.0=jdk 1.7.0
+plugin.plantplugin.PlantPlugin.depend.1=jedit 05.00.99.00
+
+# list addition jedit plugin deps
+plugin.plantplugin.PlantPlugin.depend.1=plugin errorlist.ErrorListPlugin 2.1
+
+
+# list needed jar dependencies
+plugin.plantplugin.PlantPlugin.jars=\
+    plantuml.jar \
+
+# Menu
+plugin.plantplugin.PlantPlugin.menu=\
+  plant-validate
+
+plant-validate.label=Validate Plantuml File
+
+
