@@ -12,7 +12,8 @@ plugin.plantplugin.PlantPlugin.depend.0=jdk 1.7.0
 plugin.plantplugin.PlantPlugin.depend.1=jedit 05.00.99.00
 
 # list addition jedit plugin deps
-plugin.plantplugin.PlantPlugin.depend.1=plugin errorlist.ErrorListPlugin 2.1
+plugin.plantplugin.PlantPlugin.depend.2=plugin errorlist.ErrorListPlugin 2.1
+plugin.batikdockable.BatikDockablePlugin.depend.3=plugin sidekick.SideKickPlugin 1.7
 
 
 # list needed jar dependencies

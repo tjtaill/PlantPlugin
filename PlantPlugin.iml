@@ -11,5 +11,6 @@
     <orderEntry type="library" name="jedit" level="project" />
     <orderEntry type="library" name="plantuml" level="project" />
     <orderEntry type="library" name="ErrorList" level="project" />
+    <orderEntry type="library" name="SideKick" level="project" />
   </component>
 </module>

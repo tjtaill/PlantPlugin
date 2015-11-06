@@ -43,6 +43,8 @@
     <path id="project.class.path">
         <pathelement location="${build.support}/jedit.jar"/>
         <pathelement location="${build.support}/ErrorList.jar"/>
+        <pathelement location="${build.support}/SideKick.jar"/>
+
 
         <pathelement location="${lib.dir}/plantuml.jar"/>
     </path>
