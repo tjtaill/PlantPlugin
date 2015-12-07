@@ -2,4 +2,7 @@
 	<SERVICE CLASS="sidekick.SideKickParser" NAME="plant">
 		new plantplugin.PlantSideKickParser();
 	</SERVICE>
+	<SERVICE CLASS="org.gjt.sp.jedit.buffer.FoldHandler" NAME="plant">
+		new plantplugin.PlantFoldHandler();
+	</SERVICE>
 </SERVICES>

@@ -1,0 +1,40 @@
+
+SequenceDiagram
+
+// particpants
+^(?:(participant|actor|create|boundary|control|entity|database)|create[\s ](participant|actor|boundary|control|entity|database))[\s ]+(?:["“”«»]([^"“”«»]+)["“”«»][\s ]+as[\s ]+)?([\p{L}0-9_.@]+)[\s ]*(\<\<.*\>\>)?[\s ]*(\[\[(["“”«»][^"“”«»]+["“”«»]|[^{}\s \]\[]*)(?:[\s ]*\{([^{}]+)\})?(?:[\s ]*([^\]\[]+))?\]\])?[\s ]*(#\w+[-\\|/]?\w+)?$
+^(?:(participant|actor|create|boundary|control|entity|database)|create[\s ](participant|actor|boundary|control|entity|database))[\s ]+([\p{L}0-9_.@]+)[\s ]+as[\s ]+["“”«»]([^"“”«»]+)["“”«»][\s ]*(\<\<.*\>\>)?[\s ]*(\[\[(["“”«»][^"“”«»]+["“”«»]|[^{}\s \]\[]*)(?:[\s ]*\{([^{}]+)\})?(?:[\s ]*([^\]\[]+))?\]\])?[\s ]*(#\w+[-\\|/]?\w+)?$
+^(?:(participant|actor|create|boundary|control|entity|database)|create[\s ](participant|actor|boundary|control|entity|database))[\s ]+([\p{L}0-9_.@]+)[\s ]+as[\s ]+([\p{L}0-9_.@]+)[\s ]*(\<\<.*\>\>)?[\s ]*(\[\[(["“”«»][^"“”«»]+["“”«»]|[^{}\s \]\[]*)(?:[\s ]*\{([^{}]+)\})?(?:[\s ]*([^\]\[]+))?\]\])?[\s ]*(#\w+[-\\|/]?\w+)?$
+^(?:(participant|actor|create|boundary|control|entity|database)|create[\s ](participant|actor|boundary|control|entity|database))[\s ]+["“”
+
+
+// messages 
+«»]([^"“”«»]+)["“”«»][\s ]*(\<\<.*\>\>)?[\s ]*(\[\[(["“”«»][^"“”«»]+["“”«»]|[^{}\s \]\[]*)(?:[\s ]*\{([^{}]+)\})?(?:[\s ]*([^\]\[]+))?\]\])?[\s ]*(#\w+[-\\|/]?\w+)?$
+^(&\s *)?(([\p{L}0-9_.@]+)|["“”«»]([^"“”«»]+)["“”«»]|["“”«»]([^"“”«»]+)["“”«»][\s ]*as[\s ]+([\p{L}0-9_.@]+)|([\p{L}0-9_.@]+)[\s ]+as[\s ]*["“”«»]([^"“”«»]+)["“”«»])[\s ]*([\s ][ox]|(?:[\s ][ox])?<<?|(?:[\s ][ox])?//?|(?:[\s ][ox])?\\\\?)?(?:(-+)(?:\[((?:#\w+|dotted|dashed|bold|hidden)(?:,#\w+|,dotted|,dashed|,bold|,hidden)*)\])?(-*)|(-*)(?:\[((?:#\w+|dotted|dashed|bold|hidden)(?:,#\w+|,dotted|,dashed|,bold|,hidden)*)\])?(-+))(>>?(?:[ox][\s ])?|//?(?:[ox][\s ])?|\\\\?(?:[ox][\s ])?|[ox][\s ])?[\s ]*(([\p{L}0-9_.@]+)|["“”«»]([^"“”«»]+)["“”«»]|["“”«»]([^"“”«»]+)["“”«»][\s ]*as[\s ]+([\p{L}0-9_.@]+)|([\p{L}0-9_.@]+)[\s ]+as[\s ]*["“”«»]([^"“”«»]+)["“”«»])[\s ]*(?:([+*!-]+)?)[\s ]*(?:(#\w+)?)[\s ]*(?::[\s ]*(.*))?$
+^([?\[\]][ox]?)?(?:(<<?|//?|\\\\?)?(-+)(?:\[((?:#\w+|dotted|dashed|bold|hidden)(?:,#\w+|,dotted|,dashed|,bold|,hidden)*)\])?(-*)(>>?|//?|\\\\?)|(<<?|//?|\\\\?)(-*)(?:\[((?:#\w+|dotted|dashed|bold|hidden)(?:,#\w+|,dotted|,dashed|,bold|,hidden)*)\])?(-+))([ox][\s ]+)?[\s ]*([\p{L}0-9_.@]+|["“”«»][^"“”«»]+["“”«»])[\s ]*(?::[\s ]*(.*))?$
+^([\p{L}0-9_.@]+|["“”«»][^"“”«»]+["“”«»])[\s ]*([\s ]+[ox])?(?:(<<?|//?|\\\\?)?(-+)(?:\[((?:#\w+|dotted|dashed|bold|hidden)(?:,#\w+|,dotted|,dashed|,bold|,hidden)*)\])?(-*)(>>?|//?|\\\\?)|(<<?|//?|\\\\?)(-*)(?:\[((?:#\w+|dotted|dashed|bold|hidden)(?:,#\w+|,dotted|,dashed|,bold|,hidden)*)\])?(-+))([ox]?[?\]\[])?[\s ]*(?::[\s ]*(.*))?$
+
+// notes
+^(/)?[\s ]*(note|hnote|rnote)[\s ]+(right|left|over)[\s ]+(?:of[\s ])?([\p{L}0-9_.@]+|["“”«»][^"“”«»]+["“”«»])[\s ]*(#\w+[-\\|/]?\w+)?[\s ]*:[\s ]*(.*)$
+^(/)?[\s ]*(note|hnote|rnote)[\s ]+over[\s ]+([\p{L}0-9_.@]+|["“”«»][^"“”«»]+["“”«»])[\s ]*\,[\s ]*([\p{L}0-9_.@]+|["“”«»][^"“”«»]+["“”«»])[\s ]*(#\w+[-\\|/]?\w+)?[\s ]*:[\s ]*(.*)$
+
+^note[\s ]+(right|left)[\s ]*(#\w+[-\\|/]?\w+)?[\s ]*:[\s ]*(.*)$
+START: ^(/)?[\s ]*(note|hnote|rnote)[\s ]+(right|left|over)[\s ]+(?:of[\s ]+)?([\p{L}0-9_.@]+|["“”«»][^"“”«»]+["“”«»])[\s ]*(#\w+[-\\|/]?\w+)?$
+END: (?i)^end[%s]?(note|hnote|rnote)$
+START: ^(/)?[\s ]*(note|hnote|rnote)[\s ]+over[\s ]+([\p{L}0-9_.@]+|["“”«»][^"“”«»]+["“”«»])[\s ]*\,[\s ]*([\p{L}0-9_.@]+|["“”«»][^"“”«»]+["“”«»])[\s ]*(#\w+[-\\|/]?\w+)?$
+END: (?i)^end[%s]?(note|hnote|rnote)$
+START: ^note[\s ]+(right|left)[\s ]*(#\w+[-\\|/]?\w+)?$
+END: (?i)^end[%s]?note$
+
+
+// groups
+(?i)^box(?:[\s ]+["“”«»]([^"“”«»]+)["“”«»])?(?:[\s ]+(#\w+))?$
+(?i)^end[\s ]?box$
+^(opt|alt|loop|par|par2|break|critical|else|end|also|group)((?<!else)(?<!also)(?<!end)#\w+)?(?:[\s ]+(#\w+))?(?:[\s ]+(.*?))?$
+(?i)^([\p{L}0-9_.@]+)[\s ]*(\+\+|--)[\s ]*(#\w+)?$
+(?i)^return[\s ]*(.*)$
+
+
+(
+
+C
