@@ -12,17 +12,14 @@ import java.util.Map;
 
 public class PlantFoldListener extends PlantumlBaseListener {
     private int foldLevel = 0;
-    private FoldState foldState = FoldState.NONE;
     private LinkedList<FoldState> foldStack = new LinkedList<>();
 
 
     private static enum FoldState {
-        NONE,
         PARTICIPANT,
         BOX,
         SINGLE_COMMENT,
         MULTILINE_COMMENT,
-        SINGLE_NOTE,
         MULTILINE_NOTE,
         MESSAGE,
         GROUP
@@ -43,8 +40,13 @@ public class PlantFoldListener extends PlantumlBaseListener {
     public void enterEndStatement(@NotNull PlantumlParser.EndStatementContext ctx) {
         if ( foldStack.peekFirst() == FoldState.MULTILINE_COMMENT ) return;
         int line = ctx.getStart().getLine();
-        foldLevels.put(line, foldLevel--);
+        // REMOVE TILL in and including the first group fold group Fold
+        while (! GROUP_FOLDS.contains( foldStack.peekFirst() ) ) {
+            foldStack.removeFirst();
+            foldLevel--;
+        }
         foldStack.removeFirst();
+        foldLevels.put(line, foldLevel--);
     }
 
     private void startOrContinueFolding(FoldState foldState, ParserRuleContext ctx) {
@@ -71,11 +73,12 @@ public class PlantFoldListener extends PlantumlBaseListener {
 
     @Override
     public void enterOtherLine(@NotNull PlantumlParser.OtherLineContext ctx) {
-        if ( foldStack.peekFirst() == FoldState.MULTILINE_COMMENT ) return;
         int line = ctx.getStart().getLine();
         if ( LINE_FOLDS.contains( foldStack.peekFirst() ) ) {
             foldStack.removeFirst();
             foldLevels.put(line, --foldLevel);
+        } else {
+            foldLevels.put(line, foldLevel);
         }
     }
 
@@ -89,11 +92,15 @@ public class PlantFoldListener extends PlantumlBaseListener {
         startOrContinueFolding(FoldState.MESSAGE, ctx);
     }
 
-
-
     @Override
     public void enterEndNoteStatement(@NotNull PlantumlParser.EndNoteStatementContext ctx) {
-
+        int line = ctx.getStart().getLine();
+        if ( foldStack.peekFirst() == FoldState.MULTILINE_COMMENT ) {
+            foldLevels.put( line, foldLevel);
+            return;
+        }
+        foldStack.removeFirst();
+        foldLevels.put(line, foldLevel--);
     }
 
     @Override
@@ -103,22 +110,41 @@ public class PlantFoldListener extends PlantumlBaseListener {
 
     @Override
     public void enterBeginGroupStatement(@NotNull PlantumlParser.BeginGroupStatementContext ctx) {
-        super.enterBeginGroupStatement(ctx);
+        int line = ctx.getStart().getLine();
+        if ( foldStack.peekFirst() == FoldState.MULTILINE_COMMENT ) {
+            foldLevels.put( line, foldLevel);
+            return;
+        }
+        foldStack.addFirst(FoldState.GROUP);
+        foldLevels.put(ctx.getStart().getLine(), foldLevel--);
     }
 
     @Override
     public void enterEndMultiLineComment(@NotNull PlantumlParser.EndMultiLineCommentContext ctx) {
-        super.enterEndMultiLineComment(ctx);
+        foldStack.removeFirst();
+        foldLevels.put(ctx.getStart().getLine(), foldLevel--);
     }
 
     @Override
     public void enterStartMultiLineNoteStatement(@NotNull PlantumlParser.StartMultiLineNoteStatementContext ctx) {
-        super.enterStartMultiLineNoteStatement(ctx);
+        int line = ctx.getStart().getLine();
+        if ( foldStack.peekFirst() == FoldState.MULTILINE_COMMENT ) {
+            foldLevels.put( line, foldLevel);
+            return;
+        }
+        foldStack.addFirst(FoldState.MULTILINE_NOTE);
+        foldLevels.put( line, foldLevel++);
     }
 
     @Override
     public void enterStartBoxStatement(@NotNull PlantumlParser.StartBoxStatementContext ctx) {
-        super.enterStartBoxStatement(ctx);
+        int line = ctx.getStart().getLine();
+        if ( foldStack.peekFirst() == FoldState.MULTILINE_COMMENT ) {
+            foldLevels.put( line, foldLevel);
+            return;
+        }
+        foldStack.addFirst(FoldState.BOX);
+        foldLevels.put( line, foldLevel++);
     }
 
 }
