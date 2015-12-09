@@ -1,77 +1,92 @@
 grammar Plantuml;
 
-file: statements+ | comments* | otherLine* ;
+file: ( comment | statements | otherLine )+ EOF? ;
 
-statements : startUmlStatement |
-             startBoxStatement |
-             participantStatement |
-             beginGroupStatement |
-             endStatement |
-             messageStatement |
-             startSingleLineNoteStatement |
-             startMultiLineNoteStatement |
-             endNoteStatement |
-             endUmlStatement ;
+statements : startUml |
+             sprite |
+             startBox |
+             participant |
+             startGroup |
+             end |
+             message |
+             note |
+             endNote |             
+             endUml ;
+
 
 NEWLINE : '\r'?'\n';
+SPACE : [ \t];
 
-startUmlStatement : '@startuml' ;
+
+SINGLE_LINE_COMMENT : '\'' .*? NEWLINE;
+singleLineComment : SINGLE_LINE_COMMENT ;
+
+START_MULITLINE_COMMENT : '/\'' .*? NEWLINE ;
+startMultilineComment : START_MULITLINE_COMMENT ;
+
+END_MULTILINE_COMMENT : .*? '\'/' .*? NEWLINE;
+endMultiLineComment : END_MULTILINE_COMMENT ;
+
+comment : singleLineComment | startMultilineComment | endMultiLineComment ;
 
 
-ALPHA_NUM : [a-zA-Z1-9._] | '-' ;
-participantId : '"'? ALPHA_NUM+ '"'?;
-COLOR_SPEC : '#' ALPHA_NUM+  ;
-QUOTED_STRING : '"' .*? '"' ;
+START_UML : '@startuml' SPACE*? NEWLINE;
+startUml : START_UML;
 
-startBoxStatement : 'box' QUOTED_STRING COLOR_SPEC?;
 
-PARTICIPANT : 'particpant' |
+NOT_WHITE_SPACE : ~[ \t\r\n];
+PARTICIPANT_ID : NOT_WHITE_SPACE+? ;
+PARTS :       'participant' |
               'actor' |
               'entity' |
               'boundary' |
               'database' ;
 
-simpleParticipantStatement : PARTICIPANT participantId;
-particpantAsStatement : PARTICIPANT QUOTED_STRING 'as' participantId ;
-participantStatement : simpleParticipantStatement | particpantAsStatement ;
+SPRITE : 'sprite' SPACE+? .*? NEWLINE;
+sprite : SPRITE ;
 
-GROUP : 'alt'      |
-        'else'     |
-        'opt'      |
-        'loop'     |
-        'par'      |
-        'break'    |
-        'critical' |
-        'group' ;
+QUOTED_STRING : '"' .+? '"' ;
+PARTICIPANT : PARTS SPACE+? PARTICIPANT_ID SPACE*? NEWLINE;
+PARTICIPANT_AS : PARTS SPACE+? QUOTED_STRING SPACE+? 'as' SPACE+? PARTICIPANT_ID SPACE*? NEWLINE;
+participant : PARTICIPANT | PARTICIPANT_AS;
 
-LABEL : QUOTED_STRING | TILL_NEWLINE ;
-beginGroupStatement : GROUP LABEL;
 
-endStatement : NEWLINE 'end' NEWLINE ;
-               
+START_BOX : 'box' SPACE? (QUOTED_STRING | .+?) NEWLINE;
+startBox : START_BOX;
 
-TILL_NEWLINE : .*? NEWLINE ;
-messageString : QUOTED_STRING | TILL_NEWLINE;             
-messageStatement : participantId '-' '['? COLOR_SPEC? ']'? '>' participantId ':' messageString ;
+GROUPS : 'alt'      |
+         'else'     |
+         'opt'      |
+         'loop'     |
+         'par'      |
+         'break'    |
+         'critical' |
+         'group' ;
 
-endUmlStatement : '@enduml' ;
+START_GROUP : GROUPS SPACE+? (QUOTED_STRING | .+?) NEWLINE; 
+startGroup : START_GROUP ;
+
+MESSAGE_STRING : QUOTED_STRING | .+?;
+MESSAGE : PARTICIPANT_ID SPACE*? '-' '[#'? .*? ']'? '>' SPACE*? PARTICIPANT_ID SPACE*? ':' SPACE*? MESSAGE_STRING NEWLINE;
+message : MESSAGE ;
+
+END : 'end' SPACE*? NEWLINE;
+end : END;
 
 NOTE_POSITION : 'right' | 'left' | 'over';
-startSingleLineNoteStatement : 'note' NOTE_POSITION 'of'? PARTICIPANT? ','? PARTICIPANT? ':' LABEL;
-startMultiLineNoteStatement : 'note' NOTE_POSITION 'of'? PARTICIPANT? ','? PARTICIPANT?;
-endNoteStatement : 'end' 'note';
+NOTE_STRING : (QUOTED_STRING | .+?);
+SINGLE_NOTE : 'note' SPACE+? NOTE_POSITION SPACE*? 'of'? SPACE*? PARTICIPANT_ID? SPACE*? ','? SPACE+? PARTICIPANT? SPACE*? ':' SPACE*? NOTE_STRING NEWLINE;
+MULTI_NOTE : 'note' SPACE*? NOTE_POSITION SPACE*? 'of'? SPACE*? PARTICIPANT_ID? SPACE*? ','? SPACE*? PARTICIPANT? SPACE*? NEWLINE;
+singleLineNote : SINGLE_NOTE;
+multiLineNote : MULTI_NOTE;
+note : singleLineNote | multiLineNote ;
 
-SINGLE_LINE_COMMENT : '\'' TILL_NEWLINE;
-singleLineComment : SINGLE_LINE_COMMENT ;
+END_NOTE : 'end' SPACE+? 'note' SPACE*? NEWLINE;
+endNote : END_NOTE;
 
-START_MULITLINE_COMMENT : '/\'' TILL_NEWLINE ;
-startMultilineComment : START_MULITLINE_COMMENT ;
+END_UML : '@enduml' SPACE*? (NEWLINE | EOF);
+endUml : END_UML;
 
-END_MULTILINE_COMMENT : .*? '\'/';
-endMultiLineComment : END_MULTILINE_COMMENT ;
+OTHER_LINE : .*? NEWLINE;
+otherLine : OTHER_LINE;
 
-comments : singleLineComment | startMultilineComment | endMultiLineComment ;
-
-otherLine : TILL_NEWLINE ;
-
-WS : [ \t\r\n] -> skip ;
