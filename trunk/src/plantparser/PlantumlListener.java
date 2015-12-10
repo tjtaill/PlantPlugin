@@ -9,25 +9,15 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface PlantumlListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#endStatement}.
+	 * Enter a parse tree produced by {@link PlantumlParser#multiLineNote}.
 	 * @param ctx the parse tree
 	 */
-	void enterEndStatement(@NotNull PlantumlParser.EndStatementContext ctx);
+	void enterMultiLineNote(@NotNull PlantumlParser.MultiLineNoteContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#endStatement}.
+	 * Exit a parse tree produced by {@link PlantumlParser#multiLineNote}.
 	 * @param ctx the parse tree
 	 */
-	void exitEndStatement(@NotNull PlantumlParser.EndStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#particpantAsStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterParticpantAsStatement(@NotNull PlantumlParser.ParticpantAsStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#particpantAsStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitParticpantAsStatement(@NotNull PlantumlParser.ParticpantAsStatementContext ctx);
+	void exitMultiLineNote(@NotNull PlantumlParser.MultiLineNoteContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PlantumlParser#startMultilineComment}.
 	 * @param ctx the parse tree
@@ -39,15 +29,15 @@ public interface PlantumlListener extends ParseTreeListener {
 	 */
 	void exitStartMultilineComment(@NotNull PlantumlParser.StartMultilineCommentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#comments}.
+	 * Enter a parse tree produced by {@link PlantumlParser#note}.
 	 * @param ctx the parse tree
 	 */
-	void enterComments(@NotNull PlantumlParser.CommentsContext ctx);
+	void enterNote(@NotNull PlantumlParser.NoteContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#comments}.
+	 * Exit a parse tree produced by {@link PlantumlParser#note}.
 	 * @param ctx the parse tree
 	 */
-	void exitComments(@NotNull PlantumlParser.CommentsContext ctx);
+	void exitNote(@NotNull PlantumlParser.NoteContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PlantumlParser#otherLine}.
 	 * @param ctx the parse tree
@@ -69,65 +59,55 @@ public interface PlantumlListener extends ParseTreeListener {
 	 */
 	void exitSingleLineComment(@NotNull PlantumlParser.SingleLineCommentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#messageString}.
+	 * Enter a parse tree produced by {@link PlantumlParser#singleLineNote}.
 	 * @param ctx the parse tree
 	 */
-	void enterMessageString(@NotNull PlantumlParser.MessageStringContext ctx);
+	void enterSingleLineNote(@NotNull PlantumlParser.SingleLineNoteContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#messageString}.
+	 * Exit a parse tree produced by {@link PlantumlParser#singleLineNote}.
 	 * @param ctx the parse tree
 	 */
-	void exitMessageString(@NotNull PlantumlParser.MessageStringContext ctx);
+	void exitSingleLineNote(@NotNull PlantumlParser.SingleLineNoteContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#messageStatement}.
+	 * Enter a parse tree produced by {@link PlantumlParser#message}.
 	 * @param ctx the parse tree
 	 */
-	void enterMessageStatement(@NotNull PlantumlParser.MessageStatementContext ctx);
+	void enterMessage(@NotNull PlantumlParser.MessageContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#messageStatement}.
+	 * Exit a parse tree produced by {@link PlantumlParser#message}.
 	 * @param ctx the parse tree
 	 */
-	void exitMessageStatement(@NotNull PlantumlParser.MessageStatementContext ctx);
+	void exitMessage(@NotNull PlantumlParser.MessageContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#statements}.
+	 * Enter a parse tree produced by {@link PlantumlParser#startUml}.
 	 * @param ctx the parse tree
 	 */
-	void enterStatements(@NotNull PlantumlParser.StatementsContext ctx);
+	void enterStartUml(@NotNull PlantumlParser.StartUmlContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#statements}.
+	 * Exit a parse tree produced by {@link PlantumlParser#startUml}.
 	 * @param ctx the parse tree
 	 */
-	void exitStatements(@NotNull PlantumlParser.StatementsContext ctx);
+	void exitStartUml(@NotNull PlantumlParser.StartUmlContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#endNoteStatement}.
+	 * Enter a parse tree produced by {@link PlantumlParser#participant}.
 	 * @param ctx the parse tree
 	 */
-	void enterEndNoteStatement(@NotNull PlantumlParser.EndNoteStatementContext ctx);
+	void enterParticipant(@NotNull PlantumlParser.ParticipantContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#endNoteStatement}.
+	 * Exit a parse tree produced by {@link PlantumlParser#participant}.
 	 * @param ctx the parse tree
 	 */
-	void exitEndNoteStatement(@NotNull PlantumlParser.EndNoteStatementContext ctx);
+	void exitParticipant(@NotNull PlantumlParser.ParticipantContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#participantId}.
+	 * Enter a parse tree produced by {@link PlantumlParser#endUml}.
 	 * @param ctx the parse tree
 	 */
-	void enterParticipantId(@NotNull PlantumlParser.ParticipantIdContext ctx);
+	void enterEndUml(@NotNull PlantumlParser.EndUmlContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#participantId}.
+	 * Exit a parse tree produced by {@link PlantumlParser#endUml}.
 	 * @param ctx the parse tree
 	 */
-	void exitParticipantId(@NotNull PlantumlParser.ParticipantIdContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#simpleParticipantStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterSimpleParticipantStatement(@NotNull PlantumlParser.SimpleParticipantStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#simpleParticipantStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitSimpleParticipantStatement(@NotNull PlantumlParser.SimpleParticipantStatementContext ctx);
+	void exitEndUml(@NotNull PlantumlParser.EndUmlContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PlantumlParser#file}.
 	 * @param ctx the parse tree
@@ -139,45 +119,45 @@ public interface PlantumlListener extends ParseTreeListener {
 	 */
 	void exitFile(@NotNull PlantumlParser.FileContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#startUmlStatement}.
+	 * Enter a parse tree produced by {@link PlantumlParser#startBox}.
 	 * @param ctx the parse tree
 	 */
-	void enterStartUmlStatement(@NotNull PlantumlParser.StartUmlStatementContext ctx);
+	void enterStartBox(@NotNull PlantumlParser.StartBoxContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#startUmlStatement}.
+	 * Exit a parse tree produced by {@link PlantumlParser#startBox}.
 	 * @param ctx the parse tree
 	 */
-	void exitStartUmlStatement(@NotNull PlantumlParser.StartUmlStatementContext ctx);
+	void exitStartBox(@NotNull PlantumlParser.StartBoxContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#participantStatement}.
+	 * Enter a parse tree produced by {@link PlantumlParser#startGroup}.
 	 * @param ctx the parse tree
 	 */
-	void enterParticipantStatement(@NotNull PlantumlParser.ParticipantStatementContext ctx);
+	void enterStartGroup(@NotNull PlantumlParser.StartGroupContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#participantStatement}.
+	 * Exit a parse tree produced by {@link PlantumlParser#startGroup}.
 	 * @param ctx the parse tree
 	 */
-	void exitParticipantStatement(@NotNull PlantumlParser.ParticipantStatementContext ctx);
+	void exitStartGroup(@NotNull PlantumlParser.StartGroupContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#beginGroupStatement}.
+	 * Enter a parse tree produced by {@link PlantumlParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterBeginGroupStatement(@NotNull PlantumlParser.BeginGroupStatementContext ctx);
+	void enterStatement(@NotNull PlantumlParser.StatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#beginGroupStatement}.
+	 * Exit a parse tree produced by {@link PlantumlParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitBeginGroupStatement(@NotNull PlantumlParser.BeginGroupStatementContext ctx);
+	void exitStatement(@NotNull PlantumlParser.StatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#startSingleLineNoteStatement}.
+	 * Enter a parse tree produced by {@link PlantumlParser#sprite}.
 	 * @param ctx the parse tree
 	 */
-	void enterStartSingleLineNoteStatement(@NotNull PlantumlParser.StartSingleLineNoteStatementContext ctx);
+	void enterSprite(@NotNull PlantumlParser.SpriteContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#startSingleLineNoteStatement}.
+	 * Exit a parse tree produced by {@link PlantumlParser#sprite}.
 	 * @param ctx the parse tree
 	 */
-	void exitStartSingleLineNoteStatement(@NotNull PlantumlParser.StartSingleLineNoteStatementContext ctx);
+	void exitSprite(@NotNull PlantumlParser.SpriteContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link PlantumlParser#endMultiLineComment}.
 	 * @param ctx the parse tree
@@ -189,33 +169,33 @@ public interface PlantumlListener extends ParseTreeListener {
 	 */
 	void exitEndMultiLineComment(@NotNull PlantumlParser.EndMultiLineCommentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#endUmlStatement}.
+	 * Enter a parse tree produced by {@link PlantumlParser#comment}.
 	 * @param ctx the parse tree
 	 */
-	void enterEndUmlStatement(@NotNull PlantumlParser.EndUmlStatementContext ctx);
+	void enterComment(@NotNull PlantumlParser.CommentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#endUmlStatement}.
+	 * Exit a parse tree produced by {@link PlantumlParser#comment}.
 	 * @param ctx the parse tree
 	 */
-	void exitEndUmlStatement(@NotNull PlantumlParser.EndUmlStatementContext ctx);
+	void exitComment(@NotNull PlantumlParser.CommentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#startMultiLineNoteStatement}.
+	 * Enter a parse tree produced by {@link PlantumlParser#end}.
 	 * @param ctx the parse tree
 	 */
-	void enterStartMultiLineNoteStatement(@NotNull PlantumlParser.StartMultiLineNoteStatementContext ctx);
+	void enterEnd(@NotNull PlantumlParser.EndContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#startMultiLineNoteStatement}.
+	 * Exit a parse tree produced by {@link PlantumlParser#end}.
 	 * @param ctx the parse tree
 	 */
-	void exitStartMultiLineNoteStatement(@NotNull PlantumlParser.StartMultiLineNoteStatementContext ctx);
+	void exitEnd(@NotNull PlantumlParser.EndContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PlantumlParser#startBoxStatement}.
+	 * Enter a parse tree produced by {@link PlantumlParser#endNote}.
 	 * @param ctx the parse tree
 	 */
-	void enterStartBoxStatement(@NotNull PlantumlParser.StartBoxStatementContext ctx);
+	void enterEndNote(@NotNull PlantumlParser.EndNoteContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link PlantumlParser#startBoxStatement}.
+	 * Exit a parse tree produced by {@link PlantumlParser#endNote}.
 	 * @param ctx the parse tree
 	 */
-	void exitStartBoxStatement(@NotNull PlantumlParser.StartBoxStatementContext ctx);
+	void exitEndNote(@NotNull PlantumlParser.EndNoteContext ctx);
 }

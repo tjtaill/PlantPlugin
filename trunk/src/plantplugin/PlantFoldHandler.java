@@ -2,6 +2,7 @@ package plantplugin;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.gjt.sp.jedit.buffer.FoldHandler;
 import org.gjt.sp.jedit.buffer.JEditBuffer;
@@ -12,6 +13,8 @@ import javax.swing.text.Segment;
 import java.util.HashMap;
 
 public class PlantFoldHandler extends FoldHandler {
+    private boolean needsParsing = true;
+    private HashMap<Integer, Integer> foldLevels = new HashMap<>();
 
     public PlantFoldHandler() {
         super("plant");
@@ -19,23 +22,28 @@ public class PlantFoldHandler extends FoldHandler {
 
     @Override
     public int getFoldLevel(JEditBuffer jEditBuffer, int i, Segment segment) {
-        HashMap<Integer, Integer> foldLevels = new HashMap<>();
+        if (needsParsing) {
+            try {
+                PlantumlLexer lexer = new PlantumlLexer(new ANTLRInputStream(jEditBuffer.getText()));
+                CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-        PlantumlLexer lexer = new PlantumlLexer( new ANTLRInputStream( jEditBuffer.getText() )) ;
+                PlantumlParser parser = new PlantumlParser(tokens);
 
-        CommonTokenStream tokens = new CommonTokenStream( lexer );
+                ParseTree tree = parser.file();
 
-        PlantumlParser parser = new PlantumlParser( tokens );
+                ParseTreeWalker walker = new ParseTreeWalker();
 
-        PlantumlParser.FileContext fileContext = parser.file();
+                PlantFoldListener listener = new PlantFoldListener(foldLevels);
 
-        ParseTreeWalker walker = new ParseTreeWalker();
+                walker.walk(listener, tree);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
 
-        PlantFoldListener listener = new PlantFoldListener( foldLevels );
-
-        walker.walk(listener, fileContext);
-
-        return foldLevels.size() >= i ? foldLevels.get(i) : 0;
+            needsParsing = false;
+        }
+        Integer foldLevel = foldLevels.get(i);
+        return foldLevel == null ? 0 : foldLevel;
     }
 
 

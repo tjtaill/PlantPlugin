@@ -1,8 +1,8 @@
 grammar Plantuml;
 
-file: ( comment | statements | otherLine )+ EOF? ;
+file : ( comment | statement | otherLine )+;
 
-statements : startUml |
+statement : startUml |
              sprite |
              startBox |
              participant |
@@ -67,7 +67,7 @@ START_GROUP : GROUPS SPACE+? (QUOTED_STRING | .+?) NEWLINE;
 startGroup : START_GROUP ;
 
 MESSAGE_STRING : QUOTED_STRING | .+?;
-MESSAGE : PARTICIPANT_ID SPACE*? '-' '[#'? .*? ']'? '>' SPACE*? PARTICIPANT_ID SPACE*? ':' SPACE*? MESSAGE_STRING NEWLINE;
+MESSAGE : PARTICIPANT_ID SPACE+? '-' '[#'? .*? ']'? '>' SPACE*? PARTICIPANT_ID SPACE*? ':' SPACE*? MESSAGE_STRING NEWLINE;
 message : MESSAGE ;
 
 END : 'end' SPACE*? NEWLINE;
@@ -84,9 +84,9 @@ note : singleLineNote | multiLineNote ;
 END_NOTE : 'end' SPACE+? 'note' SPACE*? NEWLINE;
 endNote : END_NOTE;
 
-END_UML : '@enduml' SPACE*? (NEWLINE | EOF);
+END_UML : '@enduml' SPACE*? NEWLINE?;
 endUml : END_UML;
 
 OTHER_LINE : .*? NEWLINE;
-otherLine : OTHER_LINE;
+otherLine : OTHER_LINE | NEWLINE;
 

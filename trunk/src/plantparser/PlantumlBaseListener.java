@@ -17,25 +17,13 @@ public class PlantumlBaseListener implements PlantumlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEndStatement(@NotNull PlantumlParser.EndStatementContext ctx) { }
+	@Override public void enterMultiLineNote(@NotNull PlantumlParser.MultiLineNoteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEndStatement(@NotNull PlantumlParser.EndStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterParticpantAsStatement(@NotNull PlantumlParser.ParticpantAsStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitParticpantAsStatement(@NotNull PlantumlParser.ParticpantAsStatementContext ctx) { }
+	@Override public void exitMultiLineNote(@NotNull PlantumlParser.MultiLineNoteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -53,13 +41,13 @@ public class PlantumlBaseListener implements PlantumlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComments(@NotNull PlantumlParser.CommentsContext ctx) { }
+	@Override public void enterNote(@NotNull PlantumlParser.NoteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitComments(@NotNull PlantumlParser.CommentsContext ctx) { }
+	@Override public void exitNote(@NotNull PlantumlParser.NoteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -89,73 +77,61 @@ public class PlantumlBaseListener implements PlantumlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMessageString(@NotNull PlantumlParser.MessageStringContext ctx) { }
+	@Override public void enterSingleLineNote(@NotNull PlantumlParser.SingleLineNoteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMessageString(@NotNull PlantumlParser.MessageStringContext ctx) { }
+	@Override public void exitSingleLineNote(@NotNull PlantumlParser.SingleLineNoteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMessageStatement(@NotNull PlantumlParser.MessageStatementContext ctx) { }
+	@Override public void enterMessage(@NotNull PlantumlParser.MessageContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMessageStatement(@NotNull PlantumlParser.MessageStatementContext ctx) { }
+	@Override public void exitMessage(@NotNull PlantumlParser.MessageContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStatements(@NotNull PlantumlParser.StatementsContext ctx) { }
+	@Override public void enterStartUml(@NotNull PlantumlParser.StartUmlContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStatements(@NotNull PlantumlParser.StatementsContext ctx) { }
+	@Override public void exitStartUml(@NotNull PlantumlParser.StartUmlContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEndNoteStatement(@NotNull PlantumlParser.EndNoteStatementContext ctx) { }
+	@Override public void enterParticipant(@NotNull PlantumlParser.ParticipantContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEndNoteStatement(@NotNull PlantumlParser.EndNoteStatementContext ctx) { }
+	@Override public void exitParticipant(@NotNull PlantumlParser.ParticipantContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParticipantId(@NotNull PlantumlParser.ParticipantIdContext ctx) { }
+	@Override public void enterEndUml(@NotNull PlantumlParser.EndUmlContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitParticipantId(@NotNull PlantumlParser.ParticipantIdContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSimpleParticipantStatement(@NotNull PlantumlParser.SimpleParticipantStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSimpleParticipantStatement(@NotNull PlantumlParser.SimpleParticipantStatementContext ctx) { }
+	@Override public void exitEndUml(@NotNull PlantumlParser.EndUmlContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -173,49 +149,49 @@ public class PlantumlBaseListener implements PlantumlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStartUmlStatement(@NotNull PlantumlParser.StartUmlStatementContext ctx) { }
+	@Override public void enterStartBox(@NotNull PlantumlParser.StartBoxContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStartUmlStatement(@NotNull PlantumlParser.StartUmlStatementContext ctx) { }
+	@Override public void exitStartBox(@NotNull PlantumlParser.StartBoxContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParticipantStatement(@NotNull PlantumlParser.ParticipantStatementContext ctx) { }
+	@Override public void enterStartGroup(@NotNull PlantumlParser.StartGroupContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitParticipantStatement(@NotNull PlantumlParser.ParticipantStatementContext ctx) { }
+	@Override public void exitStartGroup(@NotNull PlantumlParser.StartGroupContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBeginGroupStatement(@NotNull PlantumlParser.BeginGroupStatementContext ctx) { }
+	@Override public void enterStatement(@NotNull PlantumlParser.StatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBeginGroupStatement(@NotNull PlantumlParser.BeginGroupStatementContext ctx) { }
+	@Override public void exitStatement(@NotNull PlantumlParser.StatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStartSingleLineNoteStatement(@NotNull PlantumlParser.StartSingleLineNoteStatementContext ctx) { }
+	@Override public void enterSprite(@NotNull PlantumlParser.SpriteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStartSingleLineNoteStatement(@NotNull PlantumlParser.StartSingleLineNoteStatementContext ctx) { }
+	@Override public void exitSprite(@NotNull PlantumlParser.SpriteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -233,37 +209,37 @@ public class PlantumlBaseListener implements PlantumlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEndUmlStatement(@NotNull PlantumlParser.EndUmlStatementContext ctx) { }
+	@Override public void enterComment(@NotNull PlantumlParser.CommentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEndUmlStatement(@NotNull PlantumlParser.EndUmlStatementContext ctx) { }
+	@Override public void exitComment(@NotNull PlantumlParser.CommentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStartMultiLineNoteStatement(@NotNull PlantumlParser.StartMultiLineNoteStatementContext ctx) { }
+	@Override public void enterEnd(@NotNull PlantumlParser.EndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStartMultiLineNoteStatement(@NotNull PlantumlParser.StartMultiLineNoteStatementContext ctx) { }
+	@Override public void exitEnd(@NotNull PlantumlParser.EndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStartBoxStatement(@NotNull PlantumlParser.StartBoxStatementContext ctx) { }
+	@Override public void enterEndNote(@NotNull PlantumlParser.EndNoteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStartBoxStatement(@NotNull PlantumlParser.StartBoxStatementContext ctx) { }
+	@Override public void exitEndNote(@NotNull PlantumlParser.EndNoteContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
