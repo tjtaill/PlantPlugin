@@ -7,6 +7,8 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.gjt.sp.jedit.EBComponent;
 import org.gjt.sp.jedit.EBMessage;
 import org.gjt.sp.jedit.EditBus;
+import org.gjt.sp.jedit.EditPane;
+import org.gjt.sp.jedit.buffer.BufferListener;
 import org.gjt.sp.jedit.buffer.FoldHandler;
 import org.gjt.sp.jedit.buffer.JEditBuffer;
 import org.gjt.sp.jedit.msg.EditPaneUpdate;
@@ -16,18 +18,24 @@ import plantparser.PlantumlParser;
 import javax.swing.text.Segment;
 import java.util.HashMap;
 
-public class PlantFoldHandler extends FoldHandler implements EBComponent {
+public class PlantFoldHandler extends FoldHandler implements BufferListener {
     private boolean needsParsing = true;
     private HashMap<Integer, Integer> foldLevels = new HashMap<>();
     private JEditBuffer buffer;
+    private boolean bufferRegistered;
 
     public PlantFoldHandler() {
         super("plant");
-        EditBus.addToBus(this);
+
     }
 
     @Override
     public int getFoldLevel(JEditBuffer jEditBuffer, int i, Segment segment) {
+        if ( ! bufferRegistered ) {
+            jEditBuffer.addBufferListener(this);
+            bufferRegistered = true;
+        }
+
         if (needsParsing) {
             buffer = jEditBuffer;
             foldLevels.clear();
@@ -56,13 +64,42 @@ public class PlantFoldHandler extends FoldHandler implements EBComponent {
 
 
     @Override
-    public void handleMessage(EBMessage ebMessage) {
-        if( ebMessage instanceof EditPaneUpdate) {
-            EditPaneUpdate editPaneUpdate = (EditPaneUpdate) ebMessage;
+    public void foldLevelChanged(JEditBuffer jEditBuffer, int i, int i1) {
 
-            if ( !needsParsing && editPaneUpdate.getSource() == buffer && editPaneUpdate.getWhat() == EditPaneUpdate.BUFFER_CHANGED ) {
-                needsParsing = true;
-            }
-        }
+    }
+
+    @Override
+    public void contentInserted(JEditBuffer jEditBuffer, int i, int i1, int i2, int i3) {
+        needsParsing = true;
+    }
+
+    @Override
+    public void contentRemoved(JEditBuffer jEditBuffer, int i, int i1, int i2, int i3) {
+        needsParsing = true;
+    }
+
+    @Override
+    public void preContentInserted(JEditBuffer jEditBuffer, int i, int i1, int i2, int i3) {
+
+    }
+
+    @Override
+    public void preContentRemoved(JEditBuffer jEditBuffer, int i, int i1, int i2, int i3) {
+
+    }
+
+    @Override
+    public void transactionComplete(JEditBuffer jEditBuffer) {
+
+    }
+
+    @Override
+    public void foldHandlerChanged(JEditBuffer jEditBuffer) {
+
+    }
+
+    @Override
+    public void bufferLoaded(JEditBuffer jEditBuffer) {
+
     }
 }
