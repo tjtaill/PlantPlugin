@@ -31,7 +31,7 @@ public class PlantFoldHandler extends FoldHandler implements BufferListener {
 
     @Override
     public int getFoldLevel(JEditBuffer jEditBuffer, int i, Segment segment) {
-        if ( ! bufferRegistered ) {
+        if (!bufferRegistered) {
             jEditBuffer.addBufferListener(this);
             bufferRegistered = true;
         }
@@ -39,22 +39,19 @@ public class PlantFoldHandler extends FoldHandler implements BufferListener {
         if (needsParsing) {
             buffer = jEditBuffer;
             foldLevels.clear();
-            try {
-                PlantumlLexer lexer = new PlantumlLexer(new ANTLRInputStream(jEditBuffer.getText()));
-                CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-                PlantumlParser parser = new PlantumlParser(tokens);
+            PlantumlLexer lexer = new PlantumlLexer(new ANTLRInputStream(jEditBuffer.getText()));
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
 
-                ParseTree tree = parser.file();
+            PlantumlParser parser = new PlantumlParser(tokens);
 
-                ParseTreeWalker walker = new ParseTreeWalker();
+            ParseTree tree = parser.file();
 
-                PlantFoldListener listener = new PlantFoldListener(foldLevels);
+            ParseTreeWalker walker = new ParseTreeWalker();
 
-                walker.walk(listener, tree);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            PlantFoldListener listener = new PlantFoldListener(foldLevels);
+
+            walker.walk(listener, tree);
 
             needsParsing = false;
         }
