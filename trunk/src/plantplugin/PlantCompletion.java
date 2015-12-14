@@ -15,6 +15,21 @@ import java.util.List;
 public class PlantCompletion extends SideKickCompletion {
     private SideKickCompletionPopup completionPopup;
     private StringBuilder typedChars = new StringBuilder();
+    private CompletionType completionType;
+    private int line;
+
+    public void setCompletionType(CompletionType completionType) {
+        this.completionType = completionType;
+    }
+
+    public void setLine(int line) {
+        this.line = line;
+    }
+
+    public enum CompletionType {
+        PARTICIPANT,
+        MESSAGE
+    }
 
 
     public PlantCompletion(View view, String text, List items) {
@@ -62,11 +77,12 @@ public class PlantCompletion extends SideKickCompletion {
         int start = (s == null ? caret : s.getStart());
         int end = (s == null ? caret : s.getEnd());
         JEditBuffer buffer = textArea.getBuffer();
+        String prefix = completionType == CompletionType.MESSAGE ? " [[" + line + "]] " : " ";
         try
         {
             buffer.beginCompoundEdit();
-            buffer.remove(start - text.length(),text.length());
-            buffer.insert(start - text.length()," " + selected);
+            buffer.remove(start - text.length(), text.length());
+            buffer.insert(start - text.length(), prefix + selected);
         }
         finally
         {

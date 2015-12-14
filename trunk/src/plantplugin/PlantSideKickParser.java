@@ -84,7 +84,6 @@ public class PlantSideKickParser extends SideKickParser {
     public SideKickCompletion complete(EditPane editPane, int caret) {
         Buffer buffer = editPane.getBuffer();
         JEditTextArea textArea = editPane.getTextArea();
-        //TODO : figure out which type of completion it is
         char c = textArea.getText(caret-1, 1).charAt(0);
         List<String> completions = Collections.EMPTY_LIST;
         if ( c == '>') {
@@ -93,6 +92,8 @@ public class PlantSideKickParser extends SideKickParser {
             completions = completionBuilder.completeMessages();
         }
         lastCompletion = new PlantCompletion(editPane.getView(), "", completions);
+        lastCompletion.setLine( textArea.getCaretLine() );
+        lastCompletion.setCompletionType( c == ':' ? PlantCompletion.CompletionType.MESSAGE : PlantCompletion.CompletionType.PARTICIPANT);
         return lastCompletion;
     }
 

@@ -11,7 +11,6 @@ public class PlantSideKickParsedData extends SideKickParsedData {
     public DefaultMutableTreeNode particpants = null;
     public DefaultMutableTreeNode groups = null;
     public DefaultMutableTreeNode messages = null;
-    public DefaultMutableTreeNode notes = null;
 
 
     public PlantSideKickParsedData(String fileName) {

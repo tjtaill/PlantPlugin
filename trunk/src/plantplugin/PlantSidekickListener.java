@@ -30,18 +30,6 @@ public class PlantSidekickListener extends PlantumlBaseListener {
     }
 
     @Override
-    public void enterNote(@NotNull PlantumlParser.NoteContext ctx) {
-        int line = ctx.getStart().getLine()-1;
-        if ( data.notes == null ) {
-            SourceAsset notes = new SourceAsset("notes", line, begin(line, buffer) );
-            data.notes = new DefaultMutableTreeNode(notes);
-            data.root.add(data.notes);
-        }
-        SourceAsset note = new SourceAsset(ctx.getText(), line, begin(line, buffer));
-        data.notes.add( new DefaultMutableTreeNode(note));
-    }
-
-    @Override
     public void enterMessage(@NotNull PlantumlParser.MessageContext ctx) {
         int line = ctx.getStart().getLine()-1;
         if ( data.messages == null ) {
@@ -55,6 +43,9 @@ public class PlantSidekickListener extends PlantumlBaseListener {
             String p1 = matcher.group(1);
             String p2 = matcher.group(2);
             String ms = matcher.group(3);
+            ms = ms.replaceFirst("\\[\\[\\d+\\]\\]", "");
+            ms = ms.replaceFirst("\\d+:", "");
+            ms = ms.trim();
             completions.addParticipant(p1);
             completions.addParticipant(p2);
             completions.addMessage(ms);
@@ -72,7 +63,7 @@ public class PlantSidekickListener extends PlantumlBaseListener {
             data.root.add( data.particpants );
         }
         String participantText = ctx.getText();
-        participantText = participantText.substring( participantText.lastIndexOf(' ') + 1 );
+        participantText = participantText.substring( participantText.lastIndexOf(' ') + 1 ).trim();
         SourceAsset participant = new SourceAsset(participantText, line, begin(line, buffer));
         data.particpants.add(new DefaultMutableTreeNode(participant));
         completions.addParticipant(participantText);

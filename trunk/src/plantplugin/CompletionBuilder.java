@@ -24,6 +24,6 @@ public class CompletionBuilder {
     }
 
     public List<String> completeMessages() {
-        return new ArrayList<>( messages );
+        return new ArrayList<>(messages);
     }
 }
