@@ -57,8 +57,6 @@ public class PlantCompletion extends SideKickCompletion {
     public void insert(int index)
     {
         String selected = String.valueOf(get(index));
-        String[] parts = selected.split("\\s", 2);
-        selected = parts[0];
         int caret = textArea.getCaretPosition();
         Selection s = textArea.getSelectionAtOffset(caret);
         int start = (s == null ? caret : s.getStart());

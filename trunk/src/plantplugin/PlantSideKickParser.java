@@ -85,10 +85,10 @@ public class PlantSideKickParser extends SideKickParser {
         Buffer buffer = editPane.getBuffer();
         JEditTextArea textArea = editPane.getTextArea();
         //TODO : figure out which type of completion it is
-        char c = textArea.getText(caret, 1).charAt(0);
+        char c = textArea.getText(caret-1, 1).charAt(0);
         List<String> completions = Collections.EMPTY_LIST;
         if ( c == '>') {
-            completionBuilder.completeParticipant();
+            completions = completionBuilder.completeParticipant();
         } else if (c == ':' ){
             completions = completionBuilder.completeMessages();
         }
